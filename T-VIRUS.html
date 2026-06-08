@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T-VIRUS - Опасно</title>
+    <link rel="stylesheet" href="css/style.css">
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+    <div class="bg-overlay"></div>
+    <div class="blood-splatter"></div>
+    <div class="scanlines"></div>
+
+    <div class="container">
+        <!-- Главный заголовок -->
+        <header class="main-title">
+			<img class="u-logo" src="img/ucwrg-logo.png">
+            <h1 class="t-virus-title">Т-ВИРУС</h1>
+            <div class="subtitle">ВСПЫШКА КОМПЬЮТЕРНОЙ ОПАСНОСТИ</div>
+        </header>
+
+        <!-- Основной контент с карточками -->
+        <div class="main-content">
+            <!-- Левая панель -->
+            <div class="side-panel left-panel">
+                <a a href="file:///C:/" target="_blank" class="neon-button small">ПРОСМОТР ДИСКА</a>
+                
+                <div class="bio-symbol-container">
+                    <div class="bio-symbol red-glow">☣</div>
+                </div>
+                
+                <div class="info-text">
+                    <p>Компьютерное оружие</p>
+                    <p>уничтожает...</p>
+                </div>
+                
+                <div onclick="generateEicar()" class="neon-button small">УНИЧТОЖИТЬ ДАННЫЕ</div>
+            </div>
+
+            <!-- Центральная карточка -->
+            <div class="main-card">
+				<div class="img-card">
+					<div class="card-frame">
+						<img class="bio-symbol main-bio" src="img/logo.png" height="150px">
+						<br>
+						<div class="warning-text">ОСТОРОЖНО</div>
+						<br>
+						<div class="warning-text">ВИРУС ОПАСЕН</div>
+					   <!-- <div class="bio-symbol main-bio">☣</div> -->
+					</div>
+				</div>
+            </div>
+
+            <!-- Правая панель -->
+            <div class="side-panel right-panel">
+                <div class="card-frame secondary">
+					<div class="warning-subtext" style="margin-top: 400px">Альберт Вэскер</div>
+					<br>
+					<img src="img/wesker.png" height="800px">
+                    <div class="bio-symbol gray-bio" style="opacity: 1;transform: translateY(0px);transition: 0.6s;position: absolute;padding-right: 290px;font-size: 5rem;padding-bottom: 130px;">☣</div>
+                </div>
+                
+                <div class="warning-box">
+                    <div class="warning-text">ОСТОРОЖНО</div>
+                    <div class="warning-subtext">РАСПРОСТРОНЯЕТ ВИРУС</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Нижние кнопки -->
+        <div class="bottom-buttons">
+            <a class="neon-button" href="https://threats.kaspersky.com/ru/threat/DangerousObject.Acad.EICAR-Test-File/" target="_blank">О ВИРУСЕ</a>
+            <a href="ms-settings:about" class="neon-button">СИСТЕМА</a>
+            <div class="neon-button">ВЫХОД</div>
+        </div>
+
+        <!-- Декоративные элементы -->
+        <div class="deco-text top-right">КЛАССИФИКАЦИИ</div>
+        <div class="deco-text bottom-left">UMBRELLA CORP</div>
+    </div>
+
+    <script src="js/main.js"></script>
+	<script>
+        function generateEicar() {
+            // Стандартная тестовая строка EICAR
+            // Антивирусы реагируют на эту последовательность байтов
+            const eicarString = "X5O!P%@AP[4\\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*";
+
+            // Создаем Blob объект с содержимым
+            const blob = new Blob([eicarString], { type: "application/octet-stream" });
+
+            // Создаем ссылку для скачивания
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            // Используем расширение .com, так как оно часто вызывает более строгую проверку, 
+            // но антивирус среагирует даже на .txt
+            link.download = "T-VIRUS.com";
+
+            // Добавляем ссылку в документ, кликаем по ней и удаляем
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+	
+</body>
+</html>

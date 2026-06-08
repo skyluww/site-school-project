@@ -1,0 +1,454 @@
+@font-face {
+    font-family: 'Resident';
+    src: url('../fonts/resident.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BankGothic';
+    src: url('../fonts/bankgthd.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'BankGothic', sans-serif;
+    background: #050505;
+    color: #c0c0c0;
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Фоновые эффекты */
+.bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(ellipse at 30% 40%, rgba(30, 40, 50, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 60%, rgba(20, 20, 20, 0.6) 0%, transparent 50%),
+        linear-gradient(to bottom, #0a0a0a 0%, #050505 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.blood-splatter {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 85% 15%, rgba(139, 0, 0, 0.5) 0%, transparent 40%),
+        radial-gradient(circle at 15% 85%, rgba(139, 0, 0, 0.3) 0%, transparent 35%),
+        radial-gradient(circle at 90% 90%, rgba(100, 0, 0, 0.4) 0%, transparent 30%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0),
+        rgba(255,255,255,0) 50%,
+        rgba(0,0,0,0.2) 50%,
+        rgba(0,0,0,0.2)
+    );
+    background-size: 100% 3px;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+}
+
+/* Контейнер */
+.container {
+    position: relative;
+    z-index: 3;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    min-height: 100vh;
+}
+
+/* Главный заголовок T-VIRUS */
+.main-title {
+	display: flex;
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+	flex-direction: column;
+	align-items: center;
+}
+
+.t-virus-title {
+    font-family: 'Resident', cursive;
+    font-size: clamp(4rem, 12vw, 8rem);
+    color: #4c0000;
+    text-shadow: 
+        0 0 10px #ff0000,
+        0 0 20px #ff0000,
+        0 0 40px #8b0000,
+        0 0 60px #8b0000,
+        3px 3px 6px rgba(0,0,0,0.9);
+    letter-spacing: 12px;
+    position: relative;
+    display: inline-block;
+    animation: titleFlicker 4s infinite;
+    filter: drop-shadow(0 0 20px rgba(139, 0, 0, 0.8));
+}
+
+.subtitle {
+    font-family: 'Resident', sans-serif;
+    font-size: 1.8rem;
+    color: #666;
+    letter-spacing: 15px;
+    margin-top: 10px;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+/* Основной контент */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    gap: 40px;
+    align-items: center;
+    margin: 60px 0;
+    position: relative;
+}
+
+.u-logo {
+	width: 40%;
+	position: absolute;
+	margin-right: 65vw;
+}
+
+/* Боковые панели */
+.side-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 20px;
+}
+
+/* Карточки с рамками */
+.card-frame {
+	flex-direction: column;
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: rgba(30, 30, 30, 0.6);
+    border: 3px solid rgba(139, 0, 0, 0.6);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    backdrop-filter: blur(5px);
+    box-shadow: 
+        0 0 30px rgba(0, 0, 0, 0.8),
+        inset 0 0 50px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.card-frame::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%),
+        linear-gradient(45deg, rgba(139, 0, 0, 0.1) 0%, transparent 100%);
+    pointer-events: none;
+}
+
+.card-frame.secondary {
+    border-color: rgba(100, 100, 100, 0.6);
+    background: rgba(20, 20, 20, 0.7);
+}
+
+/* Символы биоопасности */
+.bio-symbol-container {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bio-symbol {
+    font-size: 10rem;
+    line-height: 1;
+    filter: drop-shadow(0 0 30px currentColor);
+}
+
+.bio-symbol.red-glow {
+    color: #ff0000;
+    text-shadow: 
+        0 0 20px #ff0000,
+        0 0 40px #ff0000,
+        0 0 60px #8b0000;
+    animation: bioPulse 2s infinite;
+}
+
+.bio-symbol.main-bio {
+    color: #cc0000;
+    font-size: 12rem;
+    text-shadow: 
+        0 0 30px #ff0000,
+        0 0 60px #cc0000,
+        0 0 90px #8b0000;
+    animation: bioPulse 3s infinite;
+}
+
+.bio-symbol.gray-bio {
+    color: #666;
+    text-shadow: 
+        0 0 20px #666,
+        0 0 40px rgba(100, 100, 100, 0.5);
+}
+
+/* Неоновые кнопки */
+.neon-button {
+    display: inline-block;
+    padding: 15px 40px;
+	border-radius: 25px;
+    background: transparent;
+    border: 3px solid #ff0000;
+    color: #ff0000;
+    font-family: 'BankGothic', sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    text-decoration: none;
+    box-shadow: 
+        0 0 10px rgba(255, 0, 0, 0.6),
+        inset 0 0 15px rgba(255, 0, 0, 0.2);
+    text-align: center;
+    min-width: 400px;
+}
+
+.neon-button.small {
+    padding: 10px 25px;
+    font-size: 0.85rem;
+    min-width: 150px;
+}
+
+.neon-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 0, 0, 0.4),
+        transparent
+    );
+    transition: left 0.5s;
+}
+
+.neon-button:hover::before {
+    left: 100%;
+}
+
+.neon-button:hover {
+    background: rgba(255, 0, 0, 0.2);
+    box-shadow: 
+        0 0 20px rgba(255, 0, 0, 0.9),
+        0 0 40px rgba(255, 0, 0, 0.5),
+        inset 0 0 25px rgba(255, 0, 0, 0.4);
+    text-shadow: 0 0 10px #ff0000;
+    transform: scale(1.05);
+}
+
+/* Информационный текст */
+.info-text {
+    text-align: center;
+    color: #888;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    line-height: 1.8;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+/* Блок WARNING */
+.warning-box {
+    text-align: center;
+    padding: 30px;
+    background: rgba(139, 0, 0, 0.15);
+    border: 3px solid #8b0000;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.warning-text {
+    font-family: 'BankGothic', sans-serif;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ff0000;
+    text-shadow: 
+        0 0 10px #ff0000,
+        0 0 20px #ff0000,
+        0 0 30px #8b0000;
+    animation: warningFlicker 2s infinite;
+    letter-spacing: 5px;
+    margin-bottom: 10px;
+}
+
+.warning-subtext {
+    font-size: 0.9rem;
+    color: #999;
+    letter-spacing: 3px;
+}
+
+/* Нижние кнопки */
+.bottom-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 60px 0;
+    flex-wrap: wrap;
+}
+
+/* Декоративный текст */
+.deco-text {
+    position: fixed;
+    font-family: 'BankGothic', sans-serif;
+    color: rgba(139, 0, 0, 0.3);
+    font-size: 1.2rem;
+    letter-spacing: 5px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.deco-text.top-right {
+    top: 40px;
+    right: 40px;
+    transform: rotate(15deg);
+}
+
+.deco-text.bottom-left {
+    bottom: 40px;
+    left: 40px;
+    transform: rotate(-10deg);
+}
+
+/* Анимации */
+@keyframes titleFlicker {
+    0%, 100% { opacity: 1; }
+    92% { opacity: 1; }
+    93% { opacity: 0.8; }
+    94% { opacity: 1; }
+    96% { opacity: 0.9; }
+    97% { opacity: 1; }
+}
+
+@keyframes bioPulse {
+    0%, 100% { 
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% { 
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+}
+
+@keyframes warningFlicker {
+    0%, 100% { 
+        opacity: 1;
+        text-shadow: 
+            0 0 10px #ff0000,
+            0 0 20px #ff0000,
+            0 0 30px #8b0000;
+    }
+    50% { 
+        opacity: 0.95;
+        text-shadow: 
+            0 0 20px #ff0000,
+            0 0 40px #ff0000,
+            0 0 60px #8b0000;
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+    .main-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .side-panel {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .card-frame {
+        max-width: 300px;
+    }
+    
+    .bio-symbol {
+        font-size: 6rem;
+    }
+    
+    .bio-symbol.main-bio {
+        font-size: 8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .t-virus-title {
+        font-size: 3rem;
+        letter-spacing: 6px;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+        letter-spacing: 8px;
+    }
+    
+    .neon-button {
+        min-width: 150px;
+        font-size: 0.9rem;
+    }
+    
+    .warning-text {
+        font-size: 1.8rem;
+    }
+}
+
+/* Эффект виньетки */
+.container::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.8) 100%);
+    pointer-events: none;
+    z-index: 4;
+}
